@@ -1,0 +1,32 @@
+<div class="main">
+    <div class="rating">
+        <div class="rating_title">
+            <div class="rating_title-wrap">
+                <div class="rating_title_text" translate>{{ 'RATING_header' }}</div>
+            </div>
+        </div>
+        <div id="refferal" class="rating_table">
+            <div class="rating_table_row rating_table_row-head">
+                <div class="rating_table_row-wrap">
+                    <div class="rating_table_row_col rating_table_row_col-place" translate>{{ 'RATING_place' }}</div>
+                    <div class="rating_table_row_col rating_table_row_col-user" translate>{{ 'RATING_nickname' }}</div>
+                    <div class="rating_table_row_col rating_table_row_col-earned" translate>{{ 'RATING_earned' }}</div>
+                    <div class="rating_table_row_col rating_table_row_col-wins" translate>{{ 'RATING_winCount' }}</div>
+                </div>
+            </div>
+            <div class="rating_table_row" ng-repeat="record in rating.money">
+                <div class="rating_table_row-wrap">
+                    <div class="rating_table_row_col rating_table_row_col-place">
+                        <div class="rating_table_row_col_place rating_table_row_col_place">{{ $index + 1 }}</div>
+                    </div>
+                    <div class="rating_table_row_col rating_table_row_col-user"><img src="{{record.avatar}}" class="rating_table_row_col_image"><a href="//steamcommunity.com/profiles/{{record.steamid}}" target="_blank" class="rating_table_row_col_user">{{ record.name.substring(0, 16) }}</a></div>
+                    <div class="rating_table_row_col rating_table_row_col-earned">
+                        <div class="rating_table_row_col_money">{{ record.money.toFixed(2) }}$</div>
+                    </div>
+                    <div class="rating_table_row_col rating_table_row_col-wins">{{ record.wins }} </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

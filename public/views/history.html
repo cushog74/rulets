@@ -1,0 +1,27 @@
+<div class="main">
+    <div class="history">
+        <div class="history_title">
+            <div class="history_title_text" translate>{{ 'HISTORY_header' }}</div>
+        </div>
+        <div id="allGames" class="history_feed">
+            <div class="history_feed_entry" ng-repeat="record in history">
+                <div class="history_feed_entry_title">
+                    <div class="history_feed_entry_title_time"></div>
+                    <div class="history_feed_entry_title_icon"><img ng-src="{{ record.winner.avatar }}" width="47" height="47" class="history_feed_entry_title_icon_image"></div>
+                    <div class="history_feed_entry_title_text"><a href="//steamcommunity.com/profiles/{{record.winner.steamid}}" target="_blank" class="history_feed_entry_title_text_user">{{ record.winner.name }}</a> {{ 'HISTORY_playerwon' | translate }} <span class="history_feed_entry_title_text_num"></span><span class="history_feed_entry_title_text_num history_feed_entry_title_text_num-money">{{ record.jackpot.toFixed(2) }}$ </span><span
+                            class="history_feed_entry_title_text_num history_feed_entry_title_text_num-luck">{{ record.winner.chance | number : 1 }}%</span></div>
+                    <div class="history_feed_entry_title_badge">#{{ record.id }}</div>
+                </div>
+                <div class="history_feed_entry_content">
+                    <div class="history_feed_entry_content_line"></div>
+                    <div class="history_feed_entry_content_list">
+                        <div class="history_feed_entry_content_list_item" ng-repeat="item in record.won_items">
+                            <img ng-src="http://cdn.steamcommunity.com/economy/image/{{ item.icon_url }}/130x80" width="130" height="80" class="history_feed_entry_content_list_item_image">
+                            <div class="history_feed_entry_content_list_item_price">{{ item.price.toFixed(2) }}$</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

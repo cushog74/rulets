@@ -1,0 +1,15 @@
+<div class="main">
+    <div class="settings">
+        <div class="settings_primary">
+            <div class="settings_primary_title" translate>{{ 'HEADER_settings' }}</div>
+            <div class="settings_primary_group">
+                <div class="settings_primary_group_label">
+                    <div class="settings_primary_group_label_text">{{ 'SETTINGS_ENTERLINK' | translate }}
+                        <a href='http://steamcommunity.com/id/me/tradeoffers/privacy#trade_offer_access_url' target='_blank' style='color:#6be031;'>{{ 'SETTINGS_GETLINK' | translate }} </a>
+                    </div>
+                </div>
+                <input type="text" placeholder="{{ 'NotSpecified' | translate }}" ng-model="tradeTokenTmp" class="settings_primary_group_control" ng-enter="SaveTradeToken(this)">
+            </div>
+        </div>
+    </div>
+</div>

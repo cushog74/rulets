@@ -1,0 +1,139 @@
+<div class="main">
+    <!--header place-->
+
+    <div class="panel">
+        <div class="panel-wrap">
+            <div class="panel_control">
+                <a class="panel_control_link panel_control_link-sound" ng-click="disableSound()">
+                    <div class="panel_control_link_text" translate>{{ 'HEADER_offSound' }}</div>
+                </a>
+            </div>
+            <div class="panel_lang">
+                <a href="#" class="panel_lang_link panel_lang_link-en">
+                    <div class="panel_lang_link_text" ng-click="translateChange('en')">English</div>
+                </a>
+                <a href="#" class="panel_lang_link panel_lang_link-ru">
+                    <div class="panel_lang_link_text" ng-click="translateChange('ru')">Russian</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="game">
+            <div class="game_status">
+                <svg viewbox="0 0 100 100" class="game_status_circle">
+               <lineargradient id="gradient">
+                  <stop offset="0%" stop-color="#6be031"></stop>
+                  <stop offset="100%" stop-color="#bdea52"></stop>
+               </lineargradient>
+               <path d="M 50,50 m 0, -47.5 a 47.5,47.5 0 1 1 0, 95 a 47.5,47.5 0 1 1 0, -95" class="game_status_circle_trail"></path>
+               <path d="M 50,50 m 0, -47.5 a 47.5,47.5 0 1 1 0, 95 a 47.5,47.5 0 1 1 0, -95" class="game_status_circle_progress"></path>
+            </svg>
+                <div class="game_status_main">
+                    <div class="game_status_main_bank">
+                        <div class="game_status_main_bank_title" translate>{{ 'GAME_bank' }}</div>
+                        <div class="game_status_main_bank_money">{{ activeGame.jackpot | number : 0 }}$</div>
+                    </div>
+                    <div class="game_status_main_roulette"></div>
+                    <div class="game_status_main_info">
+                        <div class="game_status_main_info_user"><span class="game_status_main_info_user_name"></span><span class="game_status_main_info_user_luck"></span></div>
+                        <img src="/img/nothing.png" class="game_status_main_info_image">
+                    </div>
+                </div>
+                <div class="game_status_list">
+                    <div class="game_status_list_item">
+                        <div class="game_status_list_item_title" translate>{{ 'GAME_bank' }}</div>
+                        <div class="game_status_list_item_num">{{ activeGame.pot | number : 0 }}$</div>
+                    </div>
+                    <div class="game_status_list_item">
+                        <div class="game_status_list_item_title" translate>{{ 'GAME_timeToEnd' }}</div>
+                        <div class="game_status_list_item_num" id="clock">0:00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="game_info">
+                <div class="game_info_title">{{ 'GAME_round' | translate }} #{{ activeGame.round }}</div>
+                <div class="game_info_bar">
+                    <div class="game_info_bar_progress"></div>
+                </div>
+                <div class="game_info_stat">
+                    <div class="game_info_stat_in">
+                        <div class="game_info_stat_in_title" translate>{{ 'GAME_itemsInGame' }}</div>
+                        <div class="game_info_stat_in_num">{{ activeGame.itemCount }}/50</div>
+                    </div>
+                    <a href="#" class="game_info_stat_put" ng-hide=1>
+                        <div class="game_info_stat_put_plus">
+                            <div class="game_info_stat_put_plus_icon">+</div>
+                        </div>
+                        <div class="game_info_stat_put_text">
+                            <div class="game_info_stat_put_text_title">Внести предметы</div>
+                            <div class="game_info_stat_put_text_subtitle">Минимальная ставка 1$</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="game_info_banner">
+                    <div class="game_info_banner_dots"></div>
+                    <div class="game_info_banner_list">
+                        <div class="game_info_banner_list_item">Add <b>csgox.net</b> in your nickname and get 5% bonus to win!</div>
+                        <div class="game_info_banner_list_item">Add <b>csgox.net</b> in your nickname and get 5% bonus to win!</div>
+                        <div class="game_info_banner_list_item">Add <b>csgox.net</b> in your nickname and get 5% bonus to win!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="game_tape">
+                <div class="game_tape-wrap">
+                    <div class="game_tape_title" translate>{{ 'GAME_winnersInRealTime' }}</div>
+                    <div class="game_tape_list">
+                        <div class="game_tape_list_item" ng-repeat="winner in lastWinners">
+                            <img ng-src={{winner.winner.avatar}} class="game_tape_list_item_image">
+                            <div class="game_tape_list_item_text">
+                                <div class="game_tape_list_item_text_user">{{winner.winner.name}}</div>
+                                <div class="game_tape_list_item_text_info">
+                                    <div class="game_tape_list_item_text_info_item game_tape_list_item_text_info_item-money">{{winner.jackpot.toFixed(2)}}$</div>
+                                    <div class="game_tape_list_item_text_info_item game_tape_list_item_text_info_item-luck">{{winner.winner.chance.toFixed(0)}}%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="feed">
+            <div class="feed_entry" ng-repeat="bet in activeGame.bets">
+                <div class="feed_entry_title">
+                    <div class="feed_entry_title_time"></div>
+                    <div class="feed_entry_title_icon">
+                        <img ng-src="{{ bet.avatar }}" width=" 47 " height="47 " class="feed_entry_title_icon_image "></div>
+                    <div class="feed_entry_title_text ">
+                        <a class="feed_entry_title_text_user " href="//steamcommunity.com/profiles/{{bet.steamid}}" target="_blank">{{bet.name.substring(0,14) }}</a> {{ 'GAME_placed_item' | translate }} <span class="feed_entry_title_text_num ">{{ bet.items.length }}
+                  {{ 'GAME_items' | translate }}:</span> <span class="feed_entry_title_text_num feed_entry_title_text_num-money ">
+                  {{ bet.bank.toFixed(2) | number : 2 }}$</span>
+                        <span class="feed_entry_title_text_num feed_entry_title_text_num-luck ">
+                  {{ bet.chance }}%</span>
+                    </div>
+                </div>
+                <div class="feed_entry_content ">
+                    <div class="feed_entry_content_line "></div>
+                    <div class="feed_entry_content_list ">
+                        <div class="feed_entry_content_list_item " ng-repeat="item in bet.items ">
+                            <img class="feed_entry_content_list_item_image " height="80 " ng-src="http://cdn.steamcommunity.com/economy/image/{{item.icon_url}}/130x80 " width="130 ">
+                            <div class="feed_entry_content_list_item_price ">
+                                {{ item.price | number : 2 }}$
+                            </div>
+                            <!--<div class="feed_entry_content_list_item_num "></div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feed_entry_title ">
+                <div class="feed_entry_title_time "></div>
+                <div class="feed_entry_title_icon feed_entry_title_icon-start "></div>
+                <div class="feed_entry_title_text" translate>{{ 'GAME_feed_gameStarted' }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<script>
+    var csrf_token = '{{ csrfToken }}';
+</script>
+
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title>CSGOX.NET</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="CSGO Roulette, Jackpot, Coinflip, Double: Build your dream inventory by winning hundreds of items on CSGOAWAY.COM and enjoy the thrill of playing Counter-Strike Global Offensive skins with other players all around the world!">
+        <meta name="keywords" content="cs:go roulette, cs:go jackpot, cs:go skins jackpot, cs:go best jackpot, csgojackpot, cs:go skin, win cs:go skins, cs:go skins, cs:go coinflip, cs:go coin flip, cs:go double">
+        <meta property="og:title" content="CSGOX.NET - The best CS:GO roulette in the world :)" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://csgoaway.com/" />
+        <meta property="og:image" content="https://pp.userapi.com/c638318/v638318380/32d9a/oloiO2pb9Hk.jpg" />
+        <link rel="stylesheet" href="css/main.min.css"/>
+        <link rel="stylesheet" href="css/alertify.core.css"/>
+        <link rel="stylesheet" href="css/alertify.default.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,600&amp;subset=latin,cyrillic">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="icon" type="image/x-icon" href="img/emoji/clever.png">
+        <script src="js/jquery.js"></script>
+        <script src="js/alertify.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src='js/jquery.nicescroll.min.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="js/ws.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-translate.min.js"></script>
+        <script src="js/angular-route.min.js"></script>
+        <script src="js/angular-animate.min.js"></script>
+        <script src="js/modules/app.js"></script>
+        <script src="js/modules/game.js"></script>
+        <script src="js/modules/rating.js"></script>
+        <script src="js/modules/history.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
+
+    </head>
+    <body ng-show="showContent" ng-cloak>
+        <div class="aside">
+            <div class="aside_wrap">
+                <a href="#/" class="aside_wrap_logo"></a>
+                {% raw %}
+                <div class="aside_wrap_nav">
+                    <a href="#/" class="aside_wrap_nav_item aside_wrap_nav_item-jackpot aside_wrap_nav_item-active">
+                        <div class="aside_wrap_nav_item_link" translate>{{ 'MENU_PLAY' }}</div>
+                    </a>
+                    <!--<a href="#" class="aside_wrap_nav_item aside_wrap_nav_item-coinflip">
+                  <div class="aside_wrap_nav_item_link" translate>{{ 'MENU_COINFLIP' }}</div></a><a href="#" class="aside_wrap_nav_item aside_wrap_nav_item-lottery">
+                  <div class="aside_wrap_nav_item_link" translate>{{ 'MENU_LOTTERY' }}</div></a>!-->
+                    <a href="#rating" class="aside_wrap_nav_item aside_wrap_nav_item-rating">
+                        <div class="aside_wrap_nav_item_link" translate>{{ 'MENU_RATING' }}</div>
+                    </a>
+                    <a href="#history" class="aside_wrap_nav_item aside_wrap_nav_item-history">
+                        <div class="aside_wrap_nav_item_link" translate>{{ 'MENU_HISTORY' }}</div>
+                    </a>
+                    <a href="#howtoplay" class="aside_wrap_nav_item aside_wrap_nav_item-guide">
+                        <div class="aside_wrap_nav_item_link" translate>{{ 'MENU_HOWTOPLAY' }}</div>
+                    </a>
+                </div>
+                <div class="aside_wrap_bottom">
+                    <div class="aside_wrap_bottom_social">
+                        <a href="#" class="aside_wrap_bottom_social_item aside_wrap_bottom_social_item-vk"></a>
+                        <a href="#" class="aside_wrap_bottom_social_item aside_wrap_bottom_social_item-yt"></a>
+                        <a href="#" class="aside_wrap_bottom_social_item aside_wrap_bottom_social_item-tw"></a>
+                    </div>
+                    <div class="aside_wrap_bottom_list">
+                        <a href="mailto:romanov@comeback.space" class="aside_wrap_bottom_list_item aside_wrap_bottom_list_item-support">
+                            <span class="aside_wrap_bottom_list_item_text" translate>{{ 'MENU_SUPPORT' }}</span>
+                        </a>
+                        <a href="#" class="aside_wrap_bottom_list_item aside_wrap_bottom_list_item-donate">
+                            <span class="aside_wrap_bottom_list_item_text" translate>{{ 'MENU_DONATE' }}</span>
+                        </a>
+                    </div>
+                    <div class="aside_wrap_bottom_copyright">© CSGOX.NET, 2018.</div>
+                </div>
+                {% endraw %}
+            </div>
+        </div>
+        <div class="inventory" ng-show="whoami.steamID && showInventory" ng-controller="InventoryCtrl">
+            <div class="inventory_header">
+                {% raw %}
+                <div class="inventory_header_title" translate>{{ 'HEADER_inventory' }}</div>
+                <a href="#" class="inventory_header_toggle"></a>
+                {% endraw %}
+            </div>
+            <div class="inventory_content">
+                <div class="inventory_content_list">
+                    {% raw %}
+                        <div class="inventory_content_list_item" ng-repeat="item in items" ng-click="addToCart(item.assetid, $event)" assetid="{{item.assetid}}" on-finish-render="ngRepeatFinished">
+                            <img ng-src="http://cdn.steamcommunity.com/economy/image/{{item.icon_url}}/92x63" class="inventory_content_list_item_image">
+                            <div class="inventory_content_list_item_price">{{item.price}}$</div>
+                        </div>
+                    {% endraw %}
+                </div>
+                <div class="inventory_content_pag">
+                    <!--<a href="#" class="inventory_content_pag_item inventory_content_pag_item-active">1</a>
+		<a href="#" class="inventory_content_pag_item">2</a><a href="#" class="inventory_content_pag_item">3</a>
+		<a href="#" class="inventory_content_pag_item inventory_content_pag_item-clear">...</a><a href="#" class="inventory_content_pag_item">9</a>-->
+                    <a id="inventoryPrev" class="inventory_content_pag_item inventory_content_pag_item-arrow inventory_content_pag_item-arrow-left"></a>
+                    <a id="inventoryNext" next="true" class="inventory_content_pag_item inventory_content_pag_item-arrow inventory_content_pag_item-arrow-right" style='margin-right:15px;'></a>
+                </div>
+            </div>
+            <div class="inventory_bar">
+                <div class="inventory_bar_info">
+                    <div class="inventory_bar_info_text">
+                        {% raw %}
+                            <div class="inventory_bar_info_text_title" translate>{{ 'HEADER_inventory_total' }}
+                            </div>
+                            <div class="inventory_bar_info_text_num">{{ sum.toFixed(2) }}$</div>
+                        {% endraw %}
+                    </div>
+                </div>
+                <div class="inventory_bar_action">
+                    {% raw %}
+                    <a ng-click="deposit.proceed()" class="inventory_bar_action_btn inventory_bar_action_btn-bet" translate>{{ 'HEADER_inventory_bet' }}</a>
+                    <a ng-click="deposit.clear()" class="inventory_bar_action_btn inventory_bar_action_btn-draw" translate>{{ 'HEADER_inventory_cancel' }}</a>
+                    {% endraw %}
+                </div>
+            </div>
+        </div>
+        <div class="chat" ng-controller="ChatCtrl">
+            <div class="chat_header">
+                {% raw %}
+                <div class="chat_header_title" translate>{{ 'HEADER_chat' }}</div>
+                <div class="chat_header_label"></div>
+                <a href="#" class="chat_header_toggle"></a>
+                {% endraw %}
+            </div>
+            <div class="chat_content">
+                <div class="chat_content_msg" ng-repeat="msg in messages">
+                    {% raw %}
+                        <img ng-src="{{ msg.avatar }}" class="chat_content_msg_image">
+                        <div class="chat_content_msg_box">
+                            <div class="chat_content_msg_box_title">
+                                <a class="chat_content_msg_box_title_user">{{ msg.nickname }}</a>
+                                <div class="chat_content_msg_box_title_online"></div>
+                                <div class="chat_content_msg_box_title_time"></div>
+                            </div>
+                            <div class="chat_content_msg_box_text" ng-bind-html="emoji(msg.text) | to_trusted">{{ msg.text }}</div>
+                        </div>
+                    {% endraw %}
+                </div>
+            </div>
+            <form class="chat_form">
+                {% raw %}
+                    <div class="chat_form_emoji chat_form_emoji-hide">
+                        <div class="chat_form_emoji_controls">
+                            <a href="#" class="chat_form_emoji_controls_item chat_form_emoji_controls_item-up"></a>
+                            <a href="#" class="chat_form_emoji_controls_item chat_form_emoji_controls_item-down"></a>
+                        </div>
+                        <div class="chat_form_emoji_list chat_form_emoji_list-hide">
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/fun.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/light.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/down.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/cloud.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/clever.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/money.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/navi.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/oh.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/sad.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/shot.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/zzz.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/up.png"></a>
+                            <a href="#" class="chat_form_emoji_list_item"><img src="img/emoji/smile.png"></a>
+                        </div>
+                    </div>
+                    <a class="chat_form_input_emoji"></a>
+                    <input
+                        type="text"
+                        placeholder="{{ 'HEADER_chat_write' | translate }}"
+                        class="chat_form_input"
+                        maxlength="72"
+                        placeholder="{{ (whoami.steamID ? ('MESSAGE' | translate) : ('AuthToUseChat' | translate)) }}"
+                        ng-keyup="$event.keyCode == 13 && SendChatMsg()"
+                        ng-model="chatDraft"
+                        ng-hide="!whoami.steamID">
+                    <button type="submit" class="chat_form_btn" ng-hide='1'></button>
+                {% endraw %}
+            </form>
+        </div>
+        <div class="header" ng-show="stats!=undefined">
+            <div class="header-wrap">
+                {% raw %}
+                    <div class="header_stat">
+
+                        <div class="header_stat_item">
+                            <div class="header_stat_item_num">{{ stats.largestPot | number : 0 }}$</div>
+                            <div class="header_stat_item_title">{{ 'GAME_largestBank' | translate }}</div>
+                        </div>
+                        <div class="header_stat_item">
+                            <div class="header_stat_item_num">{{ stats.usersOnline | number : 0 }}</div>
+                            <div class="header_stat_item_title">{{ 'GAME_usersOnline' | translate }}</div>
+                        </div>
+
+                    </div>
+                    <div class="header_bar">
+                        <a href="/auth/login" class="header_bar_btn header_bar_btn-steam" ng-show="!whoami.steamID" translate>{{ 'HEADER_signIn' }}</a>
+                        <div class="header_bar_profile" ng-if="whoami.steamID">
+                            <img ng-src="{{whoami.avatar}}" class="header_bar_profile_image">
+                            <div class="header_bar_profile_info">
+                                <div class="header_bar_profile_info_user">{{ whoami.name }}</div>
+                                <a href="#/settings" class="header_bar_profile_info_btn" translate>{{ 'HEADER_settings' }}</a>
+                            </div>
+                        {% endraw %}
+                    </div>
+                    <a href="#/" class="header_bar_btn header_bar_btn-guide" style='display:none;'>Пройти обучение</a>
+                </div>
+
+            </div>
+        </div>
+        <div ng-view></div>
+    </body>
+</html>
+<script src="js/all.js"></script>

@@ -1,0 +1,142 @@
+{% extends 'admin/master' %}
+
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+		<div class="row">
+      <div class="col-lg-12"><h2>Backspin System</h2></div>
+      <div id="alerts" class="col-lg-12"></div>
+			<div class="col-md-6">
+        <div class="panel panel-default">
+					<div class="panel-heading">Adding weapons to Roulette</div>
+					<div class="panel-body">
+
+            <form id="fakebet_form" class="form-horizontal" action="#">
+              {{ csrfField }}
+							<fieldset>
+
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="name">Steam ID</label>
+									<div class="col-md-9">
+									<input id="steamid" name="steamid" type="text" placeholder="User ID in Steam Community" class="form-control">
+									</div>
+								</div>
+
+                <hr/>
+
+                <div class="form-group">
+									<label class="col-md-3 control-label" for="marketname">Weapon Market Name</label>
+									<div class="col-md-9">
+										<input id="marketname" name="marketname" type="text" placeholder="Weapon Name in Steam Community Market" class="form-control">
+									</div>
+								</div>
+
+                <div class="form-group">
+									<label class="col-md-3 control-label" for="classid">Weapon Class ID</label>
+									<div class="col-md-9">
+										<input id="classid" name="classid" type="text" placeholder="Weapon Class ID in Steam DataBase" class="form-control">
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="classid">Weapon Image</label>
+									<div class="col-md-9">
+										<input id="icon_url" name="icon_url" type="text" placeholder="Weapon icon_url" class="form-control">
+									</div>
+								</div>
+
+                <div class="form-group">
+									<label class="col-md-3 control-label" for="price">Weapon Price</label>
+									<div class="col-md-9">
+                    <div class="input-group">
+                      <span class="input-group-addon btn-default">$</span>
+  										<input id="price" name="price" type="text" placeholder="Weapon Price at Steam Community Market" class="form-control">
+                    </div>
+									</div>
+								</div>
+
+								<!-- Form actions -->
+								<div class="form-group">
+									<div class="col-md-12 widget-right">
+										<div id="submitbtn" class="btn btn-default btn-lg btn-block">Submit</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+
+					</div>
+				</div>
+      </div><!--/.col-md-6-->
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Adding a message in Chat</div>
+          <div class="panel-body">
+
+            <form id="chat_form" class="form-horizontal" action="#">
+              {{ csrfField }}
+              <fieldset>
+
+                <div class="form-group">
+                  <label class="col-md-3 control-label" for="name">Steam ID</label>
+                  <div class="col-md-9">
+                  <input id="steamid" name="steamid" type="text" placeholder="User ID in Steam Community" class="form-control">
+                  </div>
+                </div>
+
+                <hr/>
+
+                <div class="form-group">
+									<label class="col-md-3 control-label" for="message">Message</label>
+									<div class="col-md-9">
+										<textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+									</div>
+								</div>
+
+                <!-- Form actions -->
+                <div class="form-group">
+                  <div class="col-md-12 widget-right">
+                    <div id="submitbtn" class="btn btn-default btn-lg btn-block">Submit</div>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+
+          </div>
+        </div>
+      </div><!--/.col-md-6-->
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+					<div class="panel-heading">Set a Roulette Winner</div>
+					<div class="panel-body">
+
+            <form id="winner_form" class="form-horizontal" action="#">
+              {{ csrfField }}
+							<fieldset>
+
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="steamid">Steam ID</label>
+									<div class="col-md-10">
+									<input id="steamid" name="steamid" type="text" placeholder="Click below" class="form-control">
+									</div>
+								</div>
+
+								<div id="round_players" class="list-group" style="margin-right: 6px; margin-left: 6px"></div>
+
+								<!-- Form actions -->
+								<div class="form-group">
+									<div class="col-md-12 widget-right">
+										<div id="submitbtn" class="btn btn-default btn-lg btn-block">Submit</div>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+
+					</div>
+				</div>
+			</div><!--/.col-md-6-->
+
+		</div><!--/.row-->
+	</div>
+  {% endblock %}

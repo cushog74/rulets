@@ -1,0 +1,34 @@
+{
+  "name": "csgorolly-bots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekifox/CSGORolly-bots.git"
+  },
+  "author": "Sergey Golubev <seria-2@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ekifox/CSGORolly-bots/issues"
+  },
+  "homepage": "https://github.com/ekifox/CSGORolly-bots#readme",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "axon": "^2.0.3",
+    "co": "^4.6.0",
+    "console2": "^2.2.9",
+    "steam": "^1.4.0",
+    "steam-totp": "^1.4.0",
+    "steam-tradeoffer-manager": "^2.7.0",
+    "steam-tradeoffers": "^3.1.0",
+    "steam-user": "^3.19.1",
+    "steam-web-api-key": "0.0.3",
+    "steam-weblogon": "0.0.5",
+    "steamcommunity": "^3.30.6",
+    "steamcommunity-mobile-confirmations": "^1.0.1"
+  }
+}
